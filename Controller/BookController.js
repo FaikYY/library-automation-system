@@ -2,7 +2,7 @@ let BookService = require("../Service/BookService");
 
 exports.get_all = async function (req, res, next) {
     try {
-        let books = await BookService.get_all({});
+        let books = await BookService.get_all();
         return res
             .status(200)
             .json({

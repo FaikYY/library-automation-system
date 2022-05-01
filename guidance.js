@@ -10,11 +10,11 @@ mongoose.connect(db_url, { useUnifiedTopology: true, useNewUrlParser: true });
 async function create() {
     try {
         const book = await BookModel.create({
-            title: "Power of Habits",
-            total_pages: 150,
-            rating: 4,
-            isbn: 12354,
-            publish_date: "2012",
+            title: "Fahreinheit 451",
+            total_pages: 220,
+            rating: 5,
+            isbn: 9874,
+            publish_date: "2016",
         });
         console.log(book);
     } catch (error) {
