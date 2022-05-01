@@ -27,7 +27,7 @@ create = async function(title, total_pages, rating, isbn, publish_date){
             isbn: isbn,
             publish_date: publish_date
         });
-        //book.save();
+        book.save();
         console.log(book);
     }
     catch(error){
@@ -35,16 +35,27 @@ create = async function(title, total_pages, rating, isbn, publish_date){
     }
 }
 
-delete_by_isbn = async function(isbn){
+delete_by_id = async function(id){
     try {
-        await Book.deleteOne({isbn: isbn});
-        console.log("The book with " + isbn + " number has been deleted succesfully!!");
+        await Book.deleteOne({_id: id});
+        console.log("The book with " + id + " id has been deleted succesfully!!");
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+update = async function(id, new_book){
+    try {
+        const book = await Book.findById(id);
+        Object.assign(book, new_book);
+        book.save();
+        console.log("The book with " + id + " number has been deleted succesfully!!");
     } catch (error) {
         console.log(error.message);
     }
 }
 
 
-module.exports = {get_all, create, delete_by_isbn};
+module.exports = {get_all, create, delete_by_id, update};
 
 // localhost:3000/api/create?title=FaikBaba&total_pages=123&rating=1&isbn=91024&publish_date=2005

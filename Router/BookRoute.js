@@ -4,11 +4,9 @@ var router = express.Router();
 var BookController = require('../Controller/BookController');
 
 router.get('/getAll', BookController.get_all);
-router.get('/create', BookController.create);
-
-// TODO: fix this part, try to replace "get" with "delete"
-router.get('/delete', BookController.delete_by_isbn);
-
+router.post('/create', BookController.create);
+router.delete('/delete/:id', BookController.delete_by_id);
+router.put('/update', BookController.update);
 
 
 module.exports = router;

@@ -36,9 +36,9 @@ create = async function (req, res, next) {
     }
 };
 
-delete_by_isbn = async function (req, res, next) {
+delete_by_id = async function (req, res, next) {
     try {
-        const book_deleted = await BookService.delete_by_isbn(req.query.isbn);
+        const book_deleted = await BookService.delete_by_id(req.params.id);
         return res
             .status(200)
             .json({
@@ -51,5 +51,28 @@ delete_by_isbn = async function (req, res, next) {
     }
 };
 
+update = async function (req, res, next) {
+    try {
+        const id = req.query.id;
+        const new_book = {
+            title: req.query.title,
+            total_pages: req.query.total_pages,
+            rating: req.query.rating,
+            isbn: req.query.isbn,
+            publish_date: req.query.publish_date
+        };
+        const books = await BookService.update(id, new_book);
+        return res
+            .status(200)
+            .json({
+                status: 200,
+                data: books,
+                message: "Succesfully Books Retrieved!",
+            });
+    } catch (error) {
+        return res.status(400).json({status: 400, message: error.message});
+    }
+};
 
-module.exports = {get_all, create, delete_by_isbn};
+
+module.exports = {get_all, create, delete_by_id, update};
