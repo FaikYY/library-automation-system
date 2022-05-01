@@ -10,7 +10,7 @@ console.log("MongoDB connection has been established!!");
 
 get_all = async function (){
     try{
-        let books = await Book.find({});
+        const books = await Book.find({});
         return books;
     }
     catch(error){
@@ -35,7 +35,16 @@ create = async function(title, total_pages, rating, isbn, publish_date){
     }
 }
 
+delete_by_isbn = async function(isbn){
+    try {
+        await Book.deleteOne({isbn: isbn});
+        console.log("The book with " + isbn + " number has been deleted succesfully!!");
+    } catch (error) {
+        console.log(error.message);
+    }
+}
 
-module.exports = {get_all, create};
+
+module.exports = {get_all, create, delete_by_isbn};
 
 // localhost:3000/api/create?title=FaikBaba&total_pages=123&rating=1&isbn=91024&publish_date=2005
