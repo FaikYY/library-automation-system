@@ -8,7 +8,7 @@ let db_url = `mongodb://${db_username}:${db_password}@localhost:27017/library?au
 mongoose.connect(db_url, { useUnifiedTopology: true, useNewUrlParser: true });
 console.log("MongoDB connection has been established!!");
 
-exports.get_all = async function (){
+get_all = async function (){
     try{
         let books = await Book.find({});
         return books;
@@ -17,3 +17,22 @@ exports.get_all = async function (){
         console.log(error.message);
     }
 }
+
+create = async function(){
+    try{
+        const book = await Book.create({
+            title: "World 141",
+            total_pages: 345,
+            rating: 3,
+            isbn: 84756,
+            publish_date: "2019"
+        });
+        console.log(book);
+    }
+    catch(error){
+        console.log(error.message);
+    }
+}
+
+
+module.exports = {get_all, create};
