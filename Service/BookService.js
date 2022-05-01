@@ -18,15 +18,16 @@ get_all = async function (){
     }
 }
 
-create = async function(){
+create = async function(title, total_pages, rating, isbn, publish_date){
     try{
         const book = await Book.create({
-            title: "World 141",
-            total_pages: 345,
-            rating: 3,
-            isbn: 84756,
-            publish_date: "2019"
+            title: title,
+            total_pages: total_pages,
+            rating: rating,
+            isbn: isbn,
+            publish_date: publish_date
         });
+        //book.save();
         console.log(book);
     }
     catch(error){
@@ -36,3 +37,5 @@ create = async function(){
 
 
 module.exports = {get_all, create};
+
+// localhost:3000/api/create?title=FaikBaba&total_pages=123&rating=1&isbn=91024&publish_date=2005

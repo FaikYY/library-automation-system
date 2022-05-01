@@ -17,7 +17,13 @@ get_all = async function (req, res, next) {
 
 create = async function (req, res, next) {
     try {
-        let books = await BookService.create();
+        const title = req.query.title;
+        const total_pages = req.query.total_pages;
+        const publish_date = req.query.publish_date;
+        const rating = req.query.rating;
+        const isbn = req.query.isbn;
+    
+        let books = await BookService.create(title, total_pages, rating, isbn, publish_date);
         return res
             .status(200)
             .json({
